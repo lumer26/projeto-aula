@@ -1,53 +1,84 @@
-'use client';
-import { useState } from "react";
+import './globals.css';
 
 export default function Home() {
-  // Estado para o número digitado
-  const [numero, setNumero] = useState<string>(""); 
-  // Estado para a lista de números
-  const [numerosLista, setNumerosLista] = useState<string[]>([]);
-
-  // Função para adicionar o número na lista
-  const criarNumero = () => {
-    if (numero.trim() !== "") {
-      setNumerosLista([...numerosLista, numero]); // Adiciona o número à lista
-      setNumero(""); // Limpa o campo após adicionar
-    }
-  };
-
-  // Função para excluir o último número da lista
-  const excluirNumero = () => {
-    setNumerosLista(numerosLista.slice(0, -1)); // Remove o último número
-  };
-
   return (
-    <div>
-      <h1 className="titulo">Projeto aula</h1>
+    
+    <div className="container">
+      
+      <button>+</button>
+      <h1>Painel Financeiro</h1>
 
-      <div className="entrada">
-        <input
-          type="number"
-          placeholder="Digite um número"
-          value={numero}
-          onChange={(e) => setNumero(e.target.value)} // Atualiza o estado do número
-        />
-      </div>  
+      <section className="resumo">
+        <div className="card1">
+          <h2 className="entrada">Entradas</h2>
+          <p>R$ 7.840,56</p>
+        </div>
+        <div className="card2">
+          <h2 className="saida">Saídas</h2>
+          <p>R$ 1.580,45</p>
+        </div>
+        <div className="card3">
+          <h2>Balanço</h2>
+          <p>R$ 6.260,11</p>
+        </div>
+      </section>
 
-      <div>
-        <h3 className="lista_entrata_saida">
-          <button className="list_criar" onClick={criarNumero}>Criar</button>
-          <button className="list_excluir" onClick={excluirNumero}>Excluir</button>
-        </h3>
-      </div>
+      <section className="analise">
+        <h2>Análise por Categorias</h2>
+        <table className="tabela">
+          <thead>
+            <tr>
+              <th>Categoria</th>
+              <th>Transações</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Alimentação</td>
+              <td>10</td>
+              <td>R$ 1.508,15</td>
+            </tr>
+            <tr>
+              <td>Mercado</td>
+              <td>8</td>
+              <td>R$ 508,90</td>
+            </tr>
+            <tr>
+              <td>Educação</td>
+              <td>5</td>
+              <td>R$ 1.200,00</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
 
-      <div className="numero_criado">
-        <h2>Números Criados:</h2>
-        <ul>
-          {numerosLista.map((num, index) => (
-            <li key={index}>{num}</li> // Exibe cada número na lista
-          ))}
-        </ul>
-      </div>
+      <section className="transacoes">
+        <h2>Transações</h2>
+        <table className="tabela">
+          <thead>
+            <tr>
+              <th>Descrição</th>
+              <th>Tipo</th>
+              <th>Valor</th>
+              <th>Banco</th>
+              <th>Data</th>
+              <th>Parcelas</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Supermercado Big Master</td>
+              <td>Crédito</td>
+              <td>R$ 896,00</td>
+              <td>Nubank</td>
+              <td>21/03/2024</td>
+              <td>1/1</td>
+            </tr>
+            {/* Adicione mais transações conforme necessário */}
+          </tbody>
+        </table>
+      </section>
     </div>
   );
 }
