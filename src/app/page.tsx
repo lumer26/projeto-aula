@@ -75,7 +75,7 @@ export default function Home() {
               <td>21/03/2024</td>
               <td>1/1</td>
             </tr>
-            {/* Adicione mais transações conforme necessário */}
+            {}
           </tbody>
         </table>
       </section>
