@@ -1,61 +1,81 @@
-import './globals.css';
+"use client";
 
-export default function Home() {
+import { useState } from 'react';
+import './globals.css'; 
+import { FaPiggyBank, FaLock, FaShoppingCart } from 'react-icons/fa';
+import { FiPlus } from 'react-icons/fi';
+
+export default function Dashboard() {
+  const [transactions] = useState([
+    {
+      descricao: 'Supermercado Big Master',
+      tipo: 'Crédito',
+      valor: 896,
+      banco: 'Nubank',
+      data: '21/03/2024',
+      parcelas: '1/1'
+    },
+    {
+      descricao: 'Supermercado Big Master',
+      tipo: 'Crédito',
+      valor: 896,
+      banco: 'Nubank',
+      data: '21/03/2024',
+      parcelas: '1/1'
+    }
+  ]);
+
   return (
-    
-    <div className="container">
-      
-      <button>+</button>
-      <h1>Painel Financeiro</h1>
+    <div className="dashboard">
+      <header className="dashboard-header">
+        <FaPiggyBank className="icon piggy" />
+        <button className="add-button">
+          <FiPlus />
+        </button>
+      </header>
 
-      <section className="resumo">
-        <div className="card1">
-          <h2 className="entrada">Entradas</h2>
-          <p>R$ 7.840,56</p>
+      <div className="summary">
+        <div className="card entrada">
+          <span>Entradas</span>
+          <h2>R$ 7.840,56</h2>
+          <p>Somada todas as entradas do período.</p>
         </div>
-        <div className="card2">
-          <h2 className="saida">Saídas</h2>
-          <p>R$ 1.580,45</p>
+        <div className="card saida">
+          <span>Saídas</span>
+          <h2>R$ 1.580,45</h2>
+          <p>Somada todas as saídas do período.</p>
         </div>
-        <div className="card3">
-          <h2>Balanço</h2>
-          <p>R$ 6.260,11</p>
+        <div className="card balanco">
+          <span>Balanço</span>
+          <h2>R$ 6.260,11</h2>
+          <p>Somada todas as entradas e saídas do período.</p>
         </div>
-      </section>
+      </div>
 
-      <section className="analise">
-        <h2>Análise por Categorias</h2>
-        <table className="tabela">
-          <thead>
-            <tr>
-              <th>Categoria</th>
-              <th>Transações</th>
-              <th>Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Alimentação</td>
-              <td>10</td>
-              <td>R$ 1.508,15</td>
-            </tr>
-            <tr>
-              <td>Mercado</td>
-              <td>8</td>
-              <td>R$ 508,90</td>
-            </tr>
-            <tr>
-              <td>Educação</td>
-              <td>5</td>
-              <td>R$ 1.200,00</td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
+      <div className="content">
+        <div className="analise">
+          <h3>Análise</h3>
+          <div className="analise-box"></div>
+        </div>
 
-      <section className="transacoes">
-        <h2>Transações</h2>
-        <table className="tabela">
+        <div className="categorias">
+          <h3>Categorias</h3>
+          <ul>
+            <li className="categoria selecionada">
+              <FaLock /> Alimentação <span>10</span> <strong>R$ 1.508,15</strong>
+            </li>
+            <li><FaShoppingCart /> Mercado <span>8</span> <strong>R$ 508,90</strong></li>
+            <li><FaLock /> Alimentação <span>10</span> <strong>R$ 1.508,15</strong></li>
+            <li><FaLock /> Alimentação <span>10</span> <strong>R$ 1.508,15</strong></li>
+            <li><FaLock /> Alimentação <span>10</span> <strong>R$ 1.508,15</strong></li>
+            <li><FaLock /> Alimentação <span>10</span> <strong>R$ 1.508,15</strong></li>
+          </ul>
+        </div>
+      </div>
+
+      <div className="transacoes">
+        <h3>Transações</h3>
+        <table>
           <thead>
             <tr>
               <th>Descrição</th>
@@ -67,18 +87,19 @@ export default function Home() {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Supermercado Big Master</td>
-              <td>Crédito</td>
-              <td>R$ 896,00</td>
-              <td>Nubank</td>
-              <td>21/03/2024</td>
-              <td>1/1</td>
-            </tr>
-            {}
+            {transactions.map((t, i) => (
+              <tr key={i}>
+                <td><FaShoppingCart /> {t.descricao}</td>
+                <td>{t.tipo}</td>
+                <td className="valor">R$ {t.valor.toFixed(2).replace('.', ',')}</td>
+                <td>{t.banco}</td>
+                <td>{t.data}</td>
+                <td>{t.parcelas}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
-      </section>
+      </div>
     </div>
   );
 }
